@@ -1,30 +1,38 @@
 class ApplicationController < ActionController::API
-  private
-  def token(user_id)
-    payload = { user_id: user_id }
-    JWT.encode(payload, hmac_secret, 'HS256')
+  before_action :authorized
+
+  def encode_token(payload)
+    JWT.encode(payload, 's3cr3t')
   end
 
-  def hmac_secret
-    ENV["API_SECRET_KEY"]
+  def auth_header
+    request.headers['Authorization']
   end
 
-  def client_has_valid_token?
-    !!current_user_id
-  end
-
-  def current_user_id
-    begin
-      token = request.headers["Authorization"]
-      decoded_array = JWT.decode(token, hmac_secret, true, { algorithm: 'HS256' })
-      payload = decoded_array.first
-    rescue #JWT::VerificationError
-      return nil
+  def decoded_token
+    if auth_header
+      token = auth_header.split(' ')[1]
+      begin
+        JWT.decode(token, 's3cr3t', true, algorithm: 'HS256')
+      rescue JWT::DecodeError
+        nil
+      end
     end
-    payload["user_id"]
   end
 
-  def require_login
-    render json: {error: 'Unauthorized'}, status: :unauthorized if !client_has_valid_token?
+  def logged_in_user
+    if decoded_token
+      user_id = decoded_token[0]['user_id']
+      @user = User.find_by(id: user_id)
+    end
+  end
+
+  def logged_in?
+    !!logged_in_user
+  end
+
+
+  def authorized
+    render json: { message: 'Please, log in'}, status: :unauthorized unless logged_in?
   end
 end
