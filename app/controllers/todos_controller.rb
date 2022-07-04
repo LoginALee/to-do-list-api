@@ -1,6 +1,10 @@
 class TodosController < ApplicationController
   def index
-    todos = Todo.order("created_at DESC")
+    todos = if logged_in_user
+      logged_in_user.todos
+    else
+      Todo.order("created_at DESC")
+    end
     render json: todos
   end
 
