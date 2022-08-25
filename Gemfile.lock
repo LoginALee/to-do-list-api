@@ -87,7 +87,7 @@ GEM
       railties (>= 5.0.0)
     faker (2.19.0)
       i18n (>= 1.6, < 2)
-    ffi (1.15.4)
+    ffi (1.15.5)
     globalid (0.5.2)
       activesupport (>= 5.0)
     i18n (1.8.10)
@@ -96,7 +96,7 @@ GEM
       activesupport (>= 5.0.0)
     jsonapi-renderer (0.2.2)
     jwt (2.3.0)
-    listen (3.7.0)
+    listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.12.0)
@@ -111,6 +111,8 @@ GEM
     msgpack (1.4.2)
     nio4r (2.5.8)
     nokogiri (1.12.5-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
     pg (1.2.3)
     puma (5.5.2)
@@ -148,7 +150,7 @@ GEM
       rake (>= 0.13)
       thor (~> 1.0)
     rake (13.0.6)
-    rb-fsevent (0.11.0)
+    rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rspec-core (3.10.1)
@@ -186,6 +188,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.12)
