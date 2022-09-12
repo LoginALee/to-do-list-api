@@ -6,7 +6,7 @@ RSpec.describe 'Users', type: :request do
       let!(:my_user) { FactoryBot.create(:user) }
 
       before do
-        post '/api/v1/posts', params:
+        post '/users', params:
                           { 
                             username: my_user.username,
                             password: my_user.password,
@@ -15,21 +15,21 @@ RSpec.describe 'Users', type: :request do
       end
 
       it 'returns the username' do
-        expect(json['username']).to eq(my_user.username)
+        expect(json['user']['username']).to eq(my_user.username)
       end
 
       it 'returns the token' do
-        expect(json['token']).to exist 
+        expect(json['token']).to be_truthy
       end
 
-      it 'returns a created status' do
-        expect(response).to have_http_status(:created)
+      it 'returns a ok status' do
+        expect(response).to have_http_status(:ok)
       end
     end
 
     context 'with invalid parameters' do
       before do
-        post '/api/v1/posts', params:
+        post '/users', params:
                           { 
                             username: '',
                             password: '',
