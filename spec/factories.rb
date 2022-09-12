@@ -4,4 +4,9 @@ FactoryBot.define do
     password { Faker::Internet.password }
     email { Faker::Internet.email }
   end
+
+  factory :to_do do
+    title { Faker::Lorem.sentence }
+    done { Faker::Boolean.boolean }
+  end
 end
