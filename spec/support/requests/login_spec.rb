@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Login', type: :request do
@@ -7,10 +9,10 @@ RSpec.describe 'Login', type: :request do
 
       before do
         post '/login', params:
-                          { 
+                          {
                             username: my_user.username,
-                            password: my_user.password,
-                          } 
+                            password: my_user.password
+                          }
       end
 
       it 'returns the user' do
@@ -32,10 +34,10 @@ RSpec.describe 'Login', type: :request do
     context 'with invalid parameters' do
       before do
         post '/login', params:
-                          { 
+                          {
                             username: '',
-                            password: '',
-                          } 
+                            password: ''
+                          }
       end
 
       it 'returns a unprocessable entity status' do

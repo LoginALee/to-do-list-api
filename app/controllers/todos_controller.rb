@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class TodosController < ApplicationController
   def index
     todos = if logged_in_user
-      logged_in_user.todos
-    else
-      Todo.order("created_at DESC")
-    end
+              logged_in_user.todos
+            else
+              Todo.order('created_at DESC')
+            end
     render json: todos
   end
 
@@ -33,7 +35,8 @@ class TodosController < ApplicationController
   end
 
   private
-    def todo_params 
-      params.require(:todo).permit(:title, :done)
-    end
+
+  def todo_params
+    params.require(:todo).permit(:title, :done)
+  end
 end
