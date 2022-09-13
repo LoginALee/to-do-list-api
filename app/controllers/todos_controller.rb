@@ -22,7 +22,7 @@ class TodosController < ApplicationController
     if todo.valid?
       render json: todo
     else
-      render json: { error: 'Invalid to do parameters' }, status: 422
+      render json: { error: 'Invalid to do parameters', a: todo.errors }, status: 422
     end
   end
 
