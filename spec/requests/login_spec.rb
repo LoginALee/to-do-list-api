@@ -8,11 +8,7 @@ RSpec.describe 'Login', type: :request do
       let!(:my_user) { FactoryBot.create(:user) }
 
       before do
-        post '/login', params:
-                          {
-                            username: my_user.username,
-                            password: my_user.password
-                          }
+        login_user my_user
       end
 
       it 'returns the user' do

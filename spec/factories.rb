@@ -7,8 +7,8 @@ FactoryBot.define do
     email { Faker::Internet.email }
   end
 
-  factory :to_do do
-    title { Faker::Lorem.sentence }
-    done { Faker::Boolean.boolean }
+  factory :todo do
+    title { Faker::Name.name }
+    done { true }
   end
 end
