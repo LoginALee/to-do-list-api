@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :authorized, only: [:auto_login]
 
@@ -6,19 +8,19 @@ class UsersController < ApplicationController
     if @user.valid?
       token = encode_token({ user_id: @user.id })
       render json: { user: @user, token: token }
-    else  
-      render json: { error: 'Invalid user or password' }
+    else
+      render json: { error: 'Invalid user or password' }, status: 422
     end
   end
 
-  def login 
+  def login
     @user = User.find_by(username: params[:username])
 
-    if @user && @user.authenticate(params[:password])
+    if @user&.authenticate(params[:password])
       token = encode_token({ user_id: @user.id })
       render json: { user: @user, token: token }
-    else  
-      render json: { error: 'Invalid user or password' }
+    else
+      render json: { error: 'Invalid user or password' }, status: 422
     end
   end
 

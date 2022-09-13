@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::API
   before_action :authorized
 
@@ -31,8 +33,7 @@ class ApplicationController < ActionController::API
     !!logged_in_user
   end
 
-
   def authorized
-    render json: { message: 'Please, log in'}, status: :unauthorized unless logged_in?
+    render json: { message: 'Please, log in' }, status: :unauthorized unless logged_in?
   end
 end
