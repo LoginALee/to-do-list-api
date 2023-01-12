@@ -84,3 +84,4 @@ production:
   database: to_do_list_api_production
   username: to_do_list_api
   password: <%= ENV['TO_DO_LIST_API_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
